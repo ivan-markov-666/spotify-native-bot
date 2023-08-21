@@ -1,11 +1,11 @@
 # Spotify Bot for "harving" nativly streams.
-That repo contains a BOT for listening Spotify songs with native streams.  
-The bot is using the browser to listen to the songs, to make the streams look more natural.  
-The bot can use VPN by providing a ovpn file and auth.txt file (described below).  
-The bot can simulate a real user, by taking a decision for randomly playing songs (described below). The selected songs that will be played are played for different time.  
-The minimum time that the song can be listen is set to 32 seconds (30 seconds is one stream for Spotify).   
-The bot can listen to a specific artist or to a specific song. The bot can switch between different artists, to make the streams look more natural. That approach will help your artist to get "Fans also like" section in Spotify in the future.  
-It a good idea to make virtual machine image and configure every image with different users and vpns. That way you can run the bot on multiple time on the same (or on different) machine. By that approach you can make more streams.  
+- That repo contains a BOT for listening Spotify songs with native streams.  
+- The bot is using the browser to listen to the songs, to make the streams look more natural.  
+- The bot can use VPN by providing a ovpn file and auth.txt file (described below).  
+- The bot can simulate a real user, by taking a decision for randomly playing songs (described below). The selected songs that will be played are played for different time.  
+- The minimum time that the song can be listen is set to 32 seconds (30 seconds is one stream for Spotify).   
+- The bot can listen to a specific artist or to a specific song. The bot can switch between different artists, to make the streams look more natural. That approach will help your artist to get "Fans also like" section in Spotify in the future.  
+- It a good idea to make virtual machine image and configure every image with different users and vpns. That way you can run the bot on multiple time on the same (or on different) machine. By that approach you can make more streams.  
 
 ## Requirements
 1. NodeJS v16.14.2 or later
