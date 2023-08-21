@@ -1,2 +1,0 @@
-1. We need to add XPATH to the method inside hoverAndClick.ts file. Right now we are using CSS selector. We need to add XPATH as well.
-2. !!! We need to make a mechanism for automatically switching the ovpn file in startVpnConnection.ps1 file.
