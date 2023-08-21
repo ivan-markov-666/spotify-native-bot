@@ -1,0 +1,44 @@
+{
+  "name": "selenium-types-script-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "clear-log": "clearLog.bat",
+    "compileConfig": "tsc src\\config\\config.ts",
+    "extractJsonConfig": "node src\\config\\extractConfig.js",
+    "build": "npm run compileConfig && npm run extractJsonConfig",
+    "report": "ts-node ./src/methods/report/report.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.11.3",
+    "selenium-webdriver": "^4.11.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.3",
+    "@types/pg": "^8.10.2",
+    "chromedriver": "^115.0.0",
+    "jest": "^29.6.2",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
+  },
+  "jest": {
+    "maxConcurrency": 1,
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
