@@ -24,7 +24,7 @@ The bot can listen to a specific artist or a specific song. It can also switch b
 ## Installation
 1. Clone the repo.
 2. Run...   
-```npm install```
+```npm install```   
 ...in the repo's root directory to install dependencies.
 
 ## Configuration
