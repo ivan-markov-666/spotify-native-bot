@@ -63,33 +63,26 @@ The second time will be run with the second credentials. The bot will listen to 
 To run the `startBot.ps1` script, you have two options, depending on your preference for security and convenience. Choose **one** of the following methods:
     - Option 1: Temporary Bypass of Execution Policy  
     For a single session without permanently changing your system's security settings, you can bypass the execution policy. This method is quicker and suitable for testing purposes:  
->   powershell -ExecutionPolicy Bypass -File .\startBot.ps1
-
+```powershell -ExecutionPolicy Bypass -File .\startBot.ps1```
 This command temporarily allows the script to run without changing the permanent execution policy.  
     - Option 2: Signing the Script with a Self-Signed Certificate
 For a more secure approach, mainly if the script will be used regularly or distributed, consider signing the script with a self-signed certificate:  
 Generate a self-signed certificate:
->   $cert = New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My"
-
+```$cert = New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My"```
 Export the certificate to a file:  
-> Export-PfxCertificate -Cert $cert -FilePath "C:\Path\To\YourProject\YourCert.pfx" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)
-
+```Export-PfxCertificate -Cert $cert -FilePath "C:\Path\To\YourProject\YourCert.pfx" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)```
 Import the certificate back into your certificate store:  
-> Import-PfxCertificate -FilePath "C:\Path\To\YourProject\YourCert.pfx" -CertStoreLocation "Cert:\CurrentUser\My" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)
-
+```Import-PfxCertificate -FilePath "C:\Path\To\YourProject\YourCert.pfx" -CertStoreLocation "Cert:\CurrentUser\My" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)```
 Sign the script using your certificate:  
-> Set-AuthenticodeSignature -FilePath "C:\Path\To\YourProject\startBot.ps1" -Certificate $cert
-
+```Set-AuthenticodeSignature -FilePath "C:\Path\To\YourProject\startBot.ps1" -Certificate $cert```
 Revert the execution policy to its original secure setting (if it was changed):  
-> Set-ExecutionPolicy RemoteSigned
-
+```Set-ExecutionPolicy RemoteSigned```
 This method ensures the script is verified as unaltered before each run, enhancing security.  
 ### Choose the method that best suits your needs and follow the respective steps.  
 5. If you set to "true" for "debugMessageToggle", "dslMessagesToggle", "pomMessagesToggle", "othersMesageToggle", "testCaseMessageToggle", "songDurationMessageToggle", "assertMessagesToggle" in the config file, you will see some messages in the PowerShell window. Those messages will be saved in the "logs" folder. You can see the logs in the "logs" folder. My suggestion is to set "songDurationMessageToggle" to "true" and set others to "false". Other toggles are for debugging purposes.  
 - If the bot crashes or fails and the VPN connection is still active, you can stop it by executing the "srcvpnvpn.ps1" file in the PowerShell console.
 - If you need to clear the logs, you can use the following script in the root folder of the project:
-> npm run clear-log  
-
+```npm run clear-log```
 ### To Do
 1. Add a report mechanism to generate expected streams based on the logs.
 2. Add FE to configure and start the bot quickly.
