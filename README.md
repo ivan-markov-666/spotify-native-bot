@@ -65,7 +65,7 @@ The second time will be run with the second credentials. The bot will listen to 
 To run the `startBot.ps1` script, you have two options, depending on your preference for security and convenience. Choose **one** of the following methods:
     - Option 1: Temporary Bypass of Execution Policy  
     For a single session without permanently changing your system's security settings, you can bypass the execution policy. This method is quicker and suitable for testing purposes:  
-```powershell -ExecutionPolicy Bypass -File .\startBot.ps1```
+```powershell -ExecutionPolicy Bypass -File .\startBot.ps1```  
 This command temporarily allows the script to run without changing the permanent execution policy.  
     - Option 2: Signing the Script with a Self-Signed Certificate
 For a more secure approach, mainly if the script will be used regularly or distributed, consider signing the script with a self-signed certificate:  
