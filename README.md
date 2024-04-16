@@ -16,7 +16,26 @@
 2. Install OpenVPN client: https://openvpn.net/community-downloads/  
 3. Add openvpn.exe to the 'environment variables' ' path'.
 4. Allow using PowerShell scripts on your machine:
-> Set-ExecutionPolicy RemoteSigned 
+   > Set-ExecutionPolicy RemoteSigned 
+5. To run the PowerShell script `startBot.ps1`, you may encounter a security warning about running scripts that are not digitally signed. To bypass this policy for a single session (which is safer than changing the policy permanently), you can start the PowerShell script with the following command:
+   > powershell -ExecutionPolicy Bypass -File .\startBot.ps1
+   This command temporarily bypasses the execution policy for running the `startBot.ps1` script without changing your system's permanent security settings.
+6. If you prefer to change the policy system-wide (not recommended for security reasons), you can set the execution policy to Unrestricted with this command (admin rights required):
+   > Set-ExecutionPolicy Unrestricted
+   Confirm with 'Y' or 'A' (Yes/All) when prompted. This allows all PowerShell scripts to run, which could potentially expose your system to malicious scripts. It is crucial to ensure that you trust the scripts you execute under this policy.
+
+
+
+
+
+
+Разбирам, че искаш да подчертаеш, че потребителят може да избере един от двата подхода, а не да изпълнява и двата. Можем да преструктурираме описанието, за да разделим ясно двата метода и да обясним, че те са алтернативни. Ето как може да изглежда това в README.md файла:
+
+```markdown
+## Preconditions
+1. Install Chrome browser: https://www.google.com/chrome/  
+2. Install OpenVPN client: https://openvpn.net/community-downloads/  
+3. Add openvpn.exe to the 'environment variables' ' path'.
 
 ## Installation
 1. Clone the repo.
@@ -56,8 +75,26 @@ The second time will be run with the second credentials. The bot will listen to 
 1. First we need to edit the config file to meet our needs. 
 2. Then we need to provide the credentials.json file with our credentials, ovpn file, and auth.txt file in a correct folder structure. We need to provide the path of that folder in the config file (see "authPath" in the config file).
 3. Open PowerShell like administrator and navigate to the repo's root directory.
-4. Run the following command:
-> .\startBot.ps1
+4. Running the PowerShell script  
+To run the `startBot.ps1` script, you have two options, depending on your preference for security and convenience. Choose **one** of the following methods:
+    - Option 1: Temporary Bypass of Execution Policy  
+    For a single session without permanently changing your system's security settings, you can bypass the execution policy. This method is quicker and suitable for testing purposes:  
+>   powershell -ExecutionPolicy Bypass -File .\startBot.ps1  
+This command temporarily allows the script to run without changing the permanent execution policy.
+    - Option 2: Signing the Script with a Self-Signed Certificate
+For a more secure approach, especially if the script will be used regularly or distributed, consider signing the script with a self-signed certificate:  
+Generate a self-signed certificate:
+>   $cert = New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My"  
+Export the certificate to a file:  
+> Export-PfxCertificate -Cert $cert -FilePath "C:\Path\To\YourProject\YourCert.pfx" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)  
+Import the certificate back into your certificate store:  
+> Import-PfxCertificate -FilePath "C:\Path\To\YourProject\YourCert.pfx" -CertStoreLocation "Cert:\CurrentUser\My" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)
+Sign the script using your certificate:  
+> Set-AuthenticodeSignature -FilePath "C:\Path\To\YourProject\startBot.ps1" -Certificate $cert
+Revert the execution policy to its original secure setting (if it was changed):  
+> Set-ExecutionPolicy RemoteSigned  
+This method ensures that the script is verified as unaltered before each run, enhancing security.  
+### Choose the method that best suits your needs and follow the respective steps.  
 5. If you set to "true" for "debugMessageToggle", "dslMessagesToggle", "pomMessagesToggle", "othersMesageToggle", "testCaseMessageToggle", "songDurationMessageToggle", "assertMessagesToggle" in the config file, you will see some messages in the PowerShell window and those messages will be saved in the "logs" folder. You can see the logs in the "logs" folder. My suggestion is to set "songDurationMessageToggle" to "true" and set others to "false". Other toggles are for debugging purposes.  
 - If the bot crashes or fails and the VPN connection is still active, you can stop the VPN connection by executing the "src\vpn\vpn.ps1" file in the PowerShell console.
 - If you need to clear the logs, you can use the following script in the root folder of the project:

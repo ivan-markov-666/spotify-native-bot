@@ -16,3 +16,6 @@ yarn-error.log*
 debug.log*
 
 /log
+
+# System
+credentials.json

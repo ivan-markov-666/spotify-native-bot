@@ -53,7 +53,7 @@ export default async function hoverAndClick(driver: WebDriver, locatorOrElement:
     }
     dslMessages(`   > ${currentFileName}:: Get the song name.`)
     // Define the locator for the song name. The locator is in the loop because we want to the song name related to the current song iteration.
-    const actualSongNamesText = `(//a/div[@data-encore-id="type"])[${iterationCount}]`;
+    const actualSongNamesText = `(//*[@*="false"]/parent::span[@data-encore-id])[${iterationCount}]`;    
     // Verify that the song name is not in the black list.
     const isSongNameExistInTheBlackList = await verifySongName(driver, actualSongNamesText, expectedNames);
     // If the song name is not in the black list...

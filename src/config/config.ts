@@ -47,7 +47,7 @@ export const config = {
    * @type          Integer number between 0 and 100.
    * @example       For example, if we want to listen to a song 80% of the time, we set randomPercentOtherArtist to 80.
    */
-  randomPercentOtherArtist: 100,
+  randomPercentOtherArtist: 80,
   /**
    * @description   That config is used to set the browser to use.
    * @type          'chrome' only for now.
@@ -62,10 +62,10 @@ export const config = {
   vpn: false,
   /**
    * @description   That config is used to set the VPN connection, artists and blacklisted songs.
-   * @type          Destination path. Provide the path of the folder contains the configuration.
+   * @type          Destination path. Provide the path of the folder contains the configuration. Please change that folder with your own path and put the auth file/s inside.
    * @example       For example, `C:\\auth`.
    */
-  authPath: `C:\\Users\\test657\\Desktop\\QA Course\\AutomationFrames\\selenium-types-script-2\\examples\\auth`,
+  authPath: `C:\\auth`,
   /**
    * @description   Provide the openvpn.exe path.
    * @type          Destination path. Provide the path of the openvpn.exe.
@@ -83,31 +83,31 @@ export const debug = {
    * @type          'true' or 'false'
    * @example       For example, if we want to display debugMessage, we set debugMessageToggle to 'true'.
    */
-  debugMessageToggle: false,
+  debugMessageToggle: true,
   /**
    * @description   dslMessages to display in the console and the log file.
    * @type          'true' or 'false'
    * @example       For example, if we want to display dslMessages, we set dslMessagesToggle to 'true'.
    */
-  dslMessagesToggle: false,
+  dslMessagesToggle: true,
   /**
    * @description   pomMessages to display in the console and the log file.
    * @type          'true' or 'false'
    * @example       For example, if we want to display pomMessages, we set pomMessagesToggle to 'true'.
    */
-  pomMessagesToggle: false,
+  pomMessagesToggle: true,
   /**
    * @description   othersMesage to display in the console and the log file.
    * @type          'true' or 'false'
    * @example       For example, if we want to display othersMesage, we set othersMesageToggle to 'true'.
    */
-  othersMesageToggle: false,
+  othersMesageToggle: true,
   /**
    * @description   testCaseMessage to display in the console and the log file.
    * @type          'true' or 'false'
    * @example       For example, if we want to display testCaseMessage, we set testCaseMessageToggle to 'true'.
    */
-  testCaseMessageToggle: false,
+  testCaseMessageToggle: true,
   /**
    * @description   songDurationMessage to display in the console and the log file.
    *                That message will display the duration of the song.
@@ -121,5 +121,5 @@ export const debug = {
    * @type          'true' or 'false'
    * @example       For example, if we want to display assertMessages, we set assertMessagesToggle to 'true'.
    */
-  assertMessagesToggle: false,
+  assertMessagesToggle: true,
 }
