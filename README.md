@@ -23,7 +23,9 @@ The bot can listen to a specific artist or a specific song. It can also switch b
 
 ## Installation
 1. Clone the repo.
-2. Run `npm install` in the repo's root directory to install dependencies.
+2. Run...   
+```npm install```
+...in the repo's root directory to install dependencies.
 
 ## Configuration
 1. To use the bot, configure the "src\config\config.ts" file.  
@@ -81,7 +83,7 @@ This method ensures the script is verified as unaltered before each run, enhanci
 ### Choose the method that best suits your needs and follow the respective steps.  
 5. If you set to "true" for "debugMessageToggle", "dslMessagesToggle", "pomMessagesToggle", "othersMesageToggle", "testCaseMessageToggle", "songDurationMessageToggle", "assertMessagesToggle" in the config file, you will see some messages in the PowerShell window. Those messages will be saved in the "logs" folder. You can see the logs in the "logs" folder. My suggestion is to set "songDurationMessageToggle" to "true" and set others to "false". Other toggles are for debugging purposes.  
 - If the bot crashes or fails and the VPN connection is still active, you can stop it by executing the "srcvpnvpn.ps1" file in the PowerShell console.
-- If you need to clear the logs, you can use the following script in the root folder of the project:
+- If you need to clear the logs, you can use the following script in the root folder of the project:  
 ```npm run clear-log```  
 ### To Do
 1. Add a report mechanism to generate expected streams based on the logs.
