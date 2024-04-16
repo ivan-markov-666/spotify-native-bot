@@ -2,9 +2,9 @@
 - That repo contains a BOT for listening to Spotify songs with native streams.  
 - The bot uses the browser to listen to the songs, making the streams look more natural.  
 - The bot can use VPN by providing a ovpn file and auth.txt file (described below).  
-- The bot can simulate a real user by randomly choosing to play songs (described below). The selected songs will be played at different times.  
-The minimum time that the song can be listened to is set to 32 seconds (30 seconds is one stream for Spotify).   
-The bot can listen to a specific artist or to a specific song. It can also switch between different artists to make the streams look more natural. That approach will help your artist get the "Fans also like" section on Spotify in the future.  
+- The bot can simulate a real user by randomly playing songs (described below). The selected songs will be played at different times.  
+The minimum time the song can be listened to is 32 seconds (30 seconds is one stream for Spotify).   
+The bot can listen to a specific artist or a specific song. It can also switch between artists to make the streams look more natural. That approach will help your artist get the "Fans also like" section on Spotify in the future.  
 - Making a virtual machine image and configuring every image with different users and VPNs is a good idea. That way, you can run the bot multiple times on the same (or different) machines, allowing you to make more streams.  
 
 ## Requirements
@@ -15,21 +15,6 @@ The bot can listen to a specific artist or to a specific song. It can also switc
 1. Install Chrome browser: https://www.google.com/chrome/  
 2. Install OpenVPN client: https://openvpn.net/community-downloads/  
 3. Add openvpn.exe to the 'environment variables' ' path'.
-4. Allow using PowerShell scripts on your machine:
-   > Set-ExecutionPolicy RemoteSigned 
-5. To run the PowerShell script `startBot.ps1`, you may encounter a security warning about running scripts that are not digitally signed. To bypass this policy for a single session (which is safer than changing the policy permanently), you can start the PowerShell script with the following command:
-   > powershell -ExecutionPolicy Bypass -File .\startBot.ps1
-   This command temporarily bypasses the execution policy for running the `startBot.ps1` script without changing your system's permanent security settings.
-6. If you prefer to change the policy system-wide (not recommended for security reasons), you can set the execution policy to Unrestricted with this command (admin rights required):
-   > Set-ExecutionPolicy Unrestricted
-   When prompted, confirm with 'Y' or 'A' (Yes/All). This allows all PowerShell scripts to run, which could expose your system to malicious scripts. Ensuring that you trust the scripts you execute under this policy is crucial.
-
-
-
-
-
-
-Разбирам, че искаш да подчертаеш, че потребителят може да избере един от двата подхода, а не да изпълнява и двата. Можем да преструктурираме описанието, за да разделим ясно двата метода и да обясним, че те са алтернативни. Ето как може да изглежда това в README.md файла:
 
 ## Preconditions
 1. Install Chrome browser: https://www.google.com/chrome/  
@@ -43,7 +28,7 @@ The bot can listen to a specific artist or to a specific song. It can also switc
 ## Configuration
 1. To use the bot, configure the "src\config\config.ts" file.  
 Open the file and read the comments to understand what to do.  
-2. Provide a credentials.json file with your Spotify credentials, ovpn file, and an auth.txt file. Those files are required to be used by the bot. You can provide only credentials.json (see the example file in examples\credentials.template.json) if you don't want to use the VPN. You can see the example with that folder structure and files in the "examples\auth" folder. Every folder (located inside the "auth" folder) will be used as a different VPN connection. So you should provide a different ovpn file and auth.txt file for every folder.  
+2. Provide a credentials.json file with your Spotify credentials, ovpn file, and an auth.txt file. Those files are required to be used by the bot. If you don't want to use the VPN, you can provide only credentials.json (see the example file in examples\credentials.template.json). You can see the example with that folder structure and files in the "examples\auth" folder. Every folder (located inside the "auth" folder) will be used as a different VPN connection. So you should provide a different ovpn file and auth.txt file for every folder.  
 Ensure you have the same folder structure as in the example folder.  
 Let's see the example for the credentials.json file:  
 ```json
@@ -78,26 +63,32 @@ The second time will be run with the second credentials. The bot will listen to 
 To run the `startBot.ps1` script, you have two options, depending on your preference for security and convenience. Choose **one** of the following methods:
     - Option 1: Temporary Bypass of Execution Policy  
     For a single session without permanently changing your system's security settings, you can bypass the execution policy. This method is quicker and suitable for testing purposes:  
->   powershell -ExecutionPolicy Bypass -File .\startBot.ps1  
+>   powershell -ExecutionPolicy Bypass -File .\startBot.ps1
+
 This command temporarily allows the script to run without changing the permanent execution policy.
     - Option 2: Signing the Script with a Self-Signed Certificate
 For a more secure approach, especially if the script will be used regularly or distributed, consider signing the script with a self-signed certificate:  
 Generate a self-signed certificate:
->   $cert = New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My"  
+>   $cert = New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My"
+
 Export the certificate to a file:  
-> Export-PfxCertificate -Cert $cert -FilePath "C:\Path\To\YourProject\YourCert.pfx" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)  
+> Export-PfxCertificate -Cert $cert -FilePath "C:\Path\To\YourProject\YourCert.pfx" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)
+
 Import the certificate back into your certificate store:  
 > Import-PfxCertificate -FilePath "C:\Path\To\YourProject\YourCert.pfx" -CertStoreLocation "Cert:\CurrentUser\My" -Password (ConvertTo-SecureString -String "YourPassword" -AsPlainText -Force)
+
 Sign the script using your certificate:  
 > Set-AuthenticodeSignature -FilePath "C:\Path\To\YourProject\startBot.ps1" -Certificate $cert
+
 Revert the execution policy to its original secure setting (if it was changed):  
-> Set-ExecutionPolicy RemoteSigned  
+> Set-ExecutionPolicy RemoteSigned
+
 This method ensures the script is verified as unaltered before each run, enhancing security.  
 ### Choose the method that best suits your needs and follow the respective steps.  
 5. If you set to "true" for "debugMessageToggle", "dslMessagesToggle", "pomMessagesToggle", "othersMesageToggle", "testCaseMessageToggle", "songDurationMessageToggle", "assertMessagesToggle" in the config file, you will see some messages in the PowerShell window. Those messages will be saved in the "logs" folder. You can see the logs in the "logs" folder. My suggestion is to set "songDurationMessageToggle" to "true" and set others to "false". Other toggles are for debugging purposes.  
 - If the bot crashes or fails and the VPN connection is still active, you can stop it by executing the "srcvpnvpn.ps1" file in the PowerShell console.
 - If you need to clear the logs, you can use the following script in the root folder of the project:
-> npm run clear-log
+> npm run clear-log  
 
 ### To Do
 1. Add a report mechanism to generate expected streams based on the logs.
