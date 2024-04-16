@@ -37,8 +37,8 @@ class SearchArtist {
   async searchArtist(driver: WebDriver, artist: string) {
     try {
       // Those locators are inside the method, because should use the artist name from the method parameter.
-      const verifyArtistIsPresent = `(//*[text() = 'Artist']/parent::div/parent::div/a/div[text() = '${artist}'])[1]`;
-      const clickArtist = `(//*[text() = 'Artist']/parent::div/parent::div/a/div[text() = '${artist}']/parent::a/parent::div/parent::div/parent::div)[1]`;
+      const verifyArtistIsPresent = `//div[text() = '${artist}']`;
+      const clickArtist = `//div[text() = '${artist}']/parent::a/parent::div/parent::div/parent::div`;
 
       // Print the message in the console and add it to the report.
       pomMessages(`+ ${currentFileName}:: SEARCH ARTIST.`)
