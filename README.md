@@ -65,9 +65,9 @@ To run the `startBot.ps1` script, you have two options, depending on your prefer
     For a single session without permanently changing your system's security settings, you can bypass the execution policy. This method is quicker and suitable for testing purposes:  
 >   powershell -ExecutionPolicy Bypass -File .\startBot.ps1
 
-This command temporarily allows the script to run without changing the permanent execution policy.
+This command temporarily allows the script to run without changing the permanent execution policy.  
     - Option 2: Signing the Script with a Self-Signed Certificate
-For a more secure approach, especially if the script will be used regularly or distributed, consider signing the script with a self-signed certificate:  
+For a more secure approach, mainly if the script will be used regularly or distributed, consider signing the script with a self-signed certificate:  
 Generate a self-signed certificate:
 >   $cert = New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\CurrentUser\My"
 
