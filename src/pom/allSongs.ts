@@ -32,7 +32,7 @@ const currentFileName = path.basename(__filename, '.ts');
 const allPlayButtons = '//*[@data-testid="play-button"]/following::div//*[@*="gridcell"]/div/button'
 const validateSongIsPlaying = `//*[@data-testid="play-button"]/following::div//*[@*="gridcell"]/div/button[@aria-label="Pause"]`;
 const allSongsTime = `//*[@*="play-button"]/following::div//*[@*="gridcell"]/following-sibling::*[@*="3"]/div`;
-const currentSongTime = `(//div[@class="playback-bar"]/div)[1]`;
+const currentSongTime = `//div[@role="gridcell"]/div[@data-encore-id="text"]`;
 const backwardSong_buttonElement = `//*[@*="control-button-skip-back"]`;
 
 // Create a class for the all songs page.

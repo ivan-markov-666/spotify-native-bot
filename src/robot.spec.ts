@@ -18,6 +18,8 @@ import ArtistPage from './pom/artistPage.po'
 import ChromeDriverVersion from './pom/chromeDriverVersion.po'
 // Import the SearchArtist page object model.
 import SearchArtist from './pom/searchArtist.po'
+// Import the playlist approach page object model.
+import Playlist from './pom/playlist.po'
 // Import the testCaseMessage method.
 import { testCaseMessage } from './methods/others/messages'
 // Import the PlayAllSongs page object model.
@@ -29,6 +31,8 @@ import { config } from './config/config'
 const loginUrl = `https://accounts.spotify.com/en/login?continue=https%3A%2F%2Fwww.spotify.com%2F`
 // Define the expected url after login.
 const expectedUrlAfterLogin = `https://open.spotify.com/?flow_ctx`
+// Define the playlistName.
+const playlistName = `My Playlist #1`
 
 // Define the credential interface.
 interface Credential {
@@ -48,6 +52,7 @@ describe(`Spotify Native Robot Simulator.`, () => {
   let searchArtistPom: SearchArtist = new SearchArtist()
   let artistPagePom: ArtistPage = new ArtistPage()
   let playAllSongsPom: PlayAllSongs = new PlayAllSongs()
+  let playlistPom: Playlist = new Playlist()
 
   /**
    * @description         This method will listen to the artist.
@@ -69,7 +74,7 @@ describe(`Spotify Native Robot Simulator.`, () => {
     // Print the message in the console and add it to the report.
     testCaseMessage(`+ Go to artist page.`)
     // Verify that the correct artist page is displayed.
-    //await artistPagePom.verifyArtistPage(driver, artist)
+    await artistPagePom.verifyArtistPage(driver, artist)
     // Print the message in the console and add it to the report.
     testCaseMessage(`- Successfully VERIFIED if the correct artist page is displayed.`)
     // Print the message in the console and add it to the report.
@@ -92,9 +97,15 @@ describe(`Spotify Native Robot Simulator.`, () => {
     testCaseMessage(`- Successfully PLAYED all songs of the artist.`)
   }
 
-  // Loop through the credentials.
-credentials.forEach((credential: Credential, index: number) => {
+  async function listenPlaylist(driver: WebDriver, playlistName: string): Promise<void> {
+    // Print the message in the console and add it to the report.
+    testCaseMessage(`+ Click over playlist '${playlistName}'.`)
+    // Click over playlist.
+    await playlistPom.clickOverPlaylist(driver, playlistName)
+  }
 
+  // Loop through the credentials.
+  credentials.forEach((credential: Credential, index: number) => {
     // Create a test case.
     it(`Spotify login process for user number ${index + 1}`, async () => {
       // Create a new instance of the driver.
@@ -120,19 +131,27 @@ credentials.forEach((credential: Credential, index: number) => {
         await acceptCookiesPom.acceptCookies(driver)
         // Print the message in the console and add it to the report.
         testCaseMessage(`- Successfully ACCEPTED COOKIES.`)
-
-        // Loop through the artists.
-        for (let artist of credential.artist) {
-          // If the artist is the main artist.
-          if (credential.mainArtist === artist) {
-            // Listen to that artist.
-            await listenArtist(driver, artist, config.randomPercentStremedArtist, true, credential.blacklist)
+        // Use 'artist' approach for listening tracks.
+        if (config.listenTracks == "artist") {
+          // Loop through the artists.
+          for (let artist of credential.artist) {
+            // If the artist is the main artist.
+            if (credential.mainArtist === artist) {
+              await listenArtist(driver, artist, config.randomPercentStremedArtist, true, credential.blacklist)
+            }
+            // If the artist is NOT the main artist.
+            else {
+              await listenArtist(driver, artist, config.randomPercentOtherArtist, false, credential.blacklist)
+            }
           }
-          // If the artist is NOT the main artist.
-          else {
-            // Listen to that artist.
-            await listenArtist(driver, artist, config.randomPercentOtherArtist, false, credential.blacklist)
-          }
+        }
+        // Use 'playlist' approach for listening tracks.
+        else if (config.listenTracks == "playlist") {
+          await listenPlaylist(driver, playlistName)
+        }
+        // Throw an error if the value is not correct.
+        else {
+          throw new Error(`Error in listenTracks: You provided '${config.listenTracks}' value. But that value is not correct. Please check the value that you provided in config file.`)
         }
       }
       // When the test case is done.
@@ -141,7 +160,7 @@ credentials.forEach((credential: Credential, index: number) => {
         await driver.quit();
       }
     },
-    // Set the timeout.
-    config.robotTimeOut);
+      // Set the timeout.
+      config.robotTimeOut);
   });
 });
