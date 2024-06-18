@@ -59,12 +59,12 @@ Let's see the example for the credentials.json file:
 ```
 With that example, we will run the bot 2 times.  
 The first time will be run with the first credentials (Make sure that you provide the correct credentials in the credentials.json file).  
-The bot will listen to the "Psysex" and "Iron Madness" artists. Because "Psysex" is the main artist, the bot will listen to that artist more than the other artists (see "randomPercentStremedArtist" and "randomPercentOtherArtist" in the config file). In the first example, we don't have any songs on the blacklist so that the bot can listen to any song from the artists. The blacklisted songs are the songs that the bot will not listen to. That list is applied to all artists. Make sure that you provide the correct song names in the blacklist because the data is case-sensitive. For example, if the song name is "Solid Stigma" and you provide "solid stigma" in the blacklist, the bot will listen to that song because the data is case sensitive!
+The bot will listen to the "Psysex" and "Iron Madness" artists. Because "Psysex" is the main artist, the bot will listen to that artist more than the other artists (see "randomPercentStremedArtist" and "randomPercentOtherArtist" in the config file). In the first example, we don't have any songs on the blacklist, so the bot can listen to any song from the artists. The blacklisted songs are the songs that the bot will not listen to. That list is applied to all artists. Make sure that you provide the correct song names in the blacklist because the data is case-sensitive. For example, if the song name is "Solid Stigma" and you provide "solid stigma" in the blacklist, the bot will listen to that song because the data is case sensitive!
 The second time will be run with the second credentials. The bot will listen to "Psysex" only. Because we have blacklisted some songs, the bot will not listen to those songs. The bot will listen to any other song from the artist.  
 
 ## How to use the bot
 1. First, we must edit the config file to meet our needs. 
-2. Then, we must provide the credentials.json file with our credentials, ovpn file, and auth.txt file in the correct folder structure. We need to provide the path of that folder in the config file (see "authPath" in the config file).
+2. Then, we must provide the credentials.json file with our credentials, the "ovpn" file, and the auth.txt file in the correct folder structure. We need to provide the path of that folder in the config file (see "authPath" in the config file).
 3. Open PowerShell like administrator and navigate to the repo's root directory.
 4. Running the PowerShell script  
 To run the `startBot.ps1` script, you have two options, depending on your preference for security and convenience. Choose **one** of the following methods:  
@@ -86,7 +86,7 @@ Revert the execution policy to its original secure setting (if it was changed):
 ```Set-ExecutionPolicy RemoteSigned```  
 This method ensures the script is verified as unaltered before each run, enhancing security.
 6. If you set to "true" for "debugMessageToggle", "dslMessagesToggle", "pomMessagesToggle", "othersMesageToggle", "testCaseMessageToggle", "songDurationMessageToggle", "assertMessagesToggle" in the config file, you will see some messages in the PowerShell window. Those messages will be saved in the "logs" folder. You can see the logs in the "logs" folder. My suggestion is to set "songDurationMessageToggle" to "true" and set others to "false". Other toggles are for debugging purposes.  
-- If the bot crashes or fails and the VPN connection is still active, you can stop it by executing the "srcvpnvpn.ps1" file in the PowerShell console.
+- If the bot crashes or fails and the VPN connection is still active, you can stop it by executing the "src\vpn\methods\stopVpnConnection.ps1" file in the PowerShell console.
 - If you need to clear the logs, you can use the following script in the root folder of the project:  
 ```npm run clear-log```
 
