@@ -19,7 +19,7 @@ import path from 'path';
 const currentFileName = path.basename(__filename, '.ts');
 
 // Define the locators.
-const verifyArtistPage_textElement = '//span/h1[@data-encore-id="type"]'
+const verifyArtistPage_textElement = '//span/h1[@data-encore-id="text"]'
 const showAll_buttonElement = `(//*[text() = 'Show all'])[1]`
 
 // Create a class for the Artist page.

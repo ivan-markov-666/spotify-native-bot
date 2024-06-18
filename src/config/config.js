@@ -10,6 +10,13 @@ exports.debug = exports.config = void 0;
  */
 exports.config = {
     /**
+     * @description   Listen tracks using artist or playlist approach.
+     * @type          'artist' or 'playlist'.
+     * @example       For example, if we want to listen to tracks using the artist approach, we set listenTracks to 'artist'.
+     *                If we want to listen to tracks using the playlist approach, we set listenTracks to 'playlist'.
+     */
+    listenTracks: 'playlist',
+    /**
      * @description   The maximum time the bot will run before it stops.
      *                That configuration will affect every user.
      * @type          Integer number in milliseconds.
@@ -61,13 +68,13 @@ exports.config = {
      * @type          'true' or 'false'
      * @example       For example, if we want to use a VPN, we set vpn to 'true'.
      */
-    vpn: false,
+    vpn: true,
     /**
      * @description   That config is used to set the VPN connection, artists and blacklisted songs.
      * @type          Destination path. Provide the path of the folder contains the configuration. Please change that folder with your own path and put the auth file/s inside.
      * @example       For example, `C:\\auth`.
      */
-    authPath: "C:\\auth",
+    authPath: "C:\\Users\\test657\\Desktop\\del\\spotify-bot\\examples\\auth",
     /**
      * @description   Provide the openvpn.exe path.
      * @type          Destination path. Provide the path of the openvpn.exe.

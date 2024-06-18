@@ -34,6 +34,6 @@ export default async function click(driver: WebDriver, locator: string): Promise
   }
   catch (error) {
     // Throw an error.
-    throw new Error(`Error in click: ${error}`)
+    throw new Error(`Maybe you try to click on an element that is not clickable. Error in click method: ${error} .`)
   }
 }
