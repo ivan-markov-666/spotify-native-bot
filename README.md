@@ -1,10 +1,14 @@
 # Spotify Bot for "harving" native streams.
 - That repo contains a BOT for listening to Spotify songs with native streams.  
 - The bot uses the browser to listen to the songs, making the streams look more natural.  
-- The bot can use VPN by providing an "ovpn" file and auth.txt file (described below).  
-- The bot can simulate a real user by randomly playing songs (described below). The selected songs will be played at different times.  
-The minimum time the song can be listened to is 32 seconds (30 seconds is one stream for Spotify).   
-The bot can listen to a specific artist or a specific song. It can also switch between artists to make the streams look more natural. That approach will help your artist get the "Fans also like" section on Spotify in the future.  
+- The bot can use VPN by providing an "ovpn" file and auth.txt file (described below).
+- There are two approaches to listening to music. You can listen directly from the artist page or your playlist.
+   - If you use the 'playlist' approach, the bot will play your playlist.
+   - If you use the 'artist' approach, the bot can simulate a real user by randomly playing songs (described below). The selected songs will be played at different times.  
+The minimum time the song can be listened to is 32 seconds (30 seconds is one stream for Spotify).  
+The bot can listen to a specific artist or a specific song. It can also switch between artists to make the streams look more natural. That approach will help your artist get the "Fans also like" section on Spotify in the future.
+
+### Useful Hints
 - Making a virtual machine image and configuring every image with different users and VPNs is a good idea. That way, you can run the bot multiple times on the same (or different) machines, allowing you to make more streams.  
 
 ## Requirements
