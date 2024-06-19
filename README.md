@@ -38,8 +38,8 @@ Open the file and read the comments to understand what to do.
      3.      Make that playlist repeatable (the repeat option is saved on the Spotify server side, so it will be remembered to your account and passed over to different devices and browsers).
      4.      Open "src\robot.spec.ts" file and change the value "playlistName" variable. The value should be your playlist name. If you are using the default name, you can skip that step.
      ```
-   - The "artist" approach - listen to music directly from artist pages.
-     If you are using that approach, you should cover the next configuration step:
+   - The "artist" approach - listen to music directly from artist pages.  
+     If you are using that approach, you should cover the next configuration step:  
      Provide a credentials.json file with your Spotify credentials, "ovpn" file, and an auth.txt file. Those files are required to be used by the bot. If you don't want to use the VPN, you can provide only credentials.json (see the example file in examples\credentials.template.json). You can see the example with that folder structure and files in the "examples\auth" folder. Every folder (located inside the "auth" folder) will be used as a different VPN connection. So you should provide a different "ovpn" file and auth.txt file for every folder.  
 Ensure you have the same folder structure as in the example folder.  
 Let's see the example for the credentials.json file:  
